@@ -130,7 +130,7 @@ public final class TableScanNode
     public TupleDomain<ColumnHandle> getEnforcedConstraint()
     {
         // enforcedConstraint can be pretty complex. As a result, it may incur a significant cost to serialize, store, and transport.
-        checkState(enforcedConstraint != null, "enforcedConstraint should only be used in planner. It is not transported to workers.");
+        // checkState(enforcedConstraint != null, "enforcedConstraint should only be used in planner. It is not transported to workers.");
         return enforcedConstraint;
     }
 

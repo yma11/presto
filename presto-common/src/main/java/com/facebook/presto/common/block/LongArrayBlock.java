@@ -13,6 +13,8 @@
  */
 package com.facebook.presto.common.block;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.airlift.slice.SliceOutput;
 import org.openjdk.jol.info.ClassLayout;
 
@@ -32,6 +34,9 @@ import static io.airlift.slice.SizeOf.sizeOf;
 import static java.lang.Math.toIntExact;
 import static java.lang.String.format;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "values")
 public class LongArrayBlock
         implements Block
 {

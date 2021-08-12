@@ -13,6 +13,8 @@
  */
 package com.facebook.presto.common.block;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.airlift.slice.Slice;
 import io.airlift.slice.SliceOutput;
 import io.airlift.slice.Slices;
@@ -36,6 +38,9 @@ import static io.airlift.slice.SizeOf.sizeOf;
 import static java.lang.Integer.bitCount;
 import static java.lang.String.format;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "values")
 public class Int128ArrayBlock
         implements Block
 {
