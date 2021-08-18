@@ -27,7 +27,7 @@ public class CiderAggregationNode
         this.aggregationNode = aggregationNode;
         this.fuseEnabled = fuseEnabled;
     }
-    public String toRAJsonStr()
+    public String toRAJsonStr(String step)
     {
         if (!fuseEnabled) {
             // if cider only takes agg op without previous ops such as project/filter, we
@@ -39,7 +39,8 @@ public class CiderAggregationNode
             ObjectNode tableScanNode = objectMapper.createObjectNode();
             tableScanNode.put("id", "0");
             tableScanNode.put("relOp", "LogicalTableScan");
-            tableScanNode.set("fieldNames", CiderPlanBuilderHelper.getFakeScanFieldNodes(objectMapper, aggregationNode));
+            tableScanNode.set("fieldNames",
+                    CiderPlanBuilderHelper.getFakeScanFieldNodes(objectMapper, aggregationNode, step));
             tableScanNode.set("table", CiderPlanBuilderHelper.getTableInfoNodes(objectMapper, aggregationNode));
             tableScanNode.set("inputs", objectMapper.createArrayNode());
             // compose AggregationNode
@@ -49,11 +50,11 @@ public class CiderAggregationNode
             // convert aggregations to Cider format
             ArrayNode aggNodes = CiderPlanBuilderHelper.getAggNodes(objectMapper, aggregationNode);
             // feilds info
-            ArrayNode feildNodes = CiderPlanBuilderHelper.getAggFeildNodes(objectMapper, aggregationNode);
+            ArrayNode fieldNodes = CiderPlanBuilderHelper.getAggFeildNodes(objectMapper, aggregationNode);
             aggregationJSONNode.put("id", "1");
             // repOp node
             aggregationJSONNode.put("relOp", "LogicalAggregate");
-            aggregationJSONNode.set("fields", feildNodes);
+            aggregationJSONNode.set("fields", fieldNodes);
             aggregationJSONNode.set("group", groupNodes);
             aggregationJSONNode.set("aggs", aggNodes);
             relsNode.add(tableScanNode);

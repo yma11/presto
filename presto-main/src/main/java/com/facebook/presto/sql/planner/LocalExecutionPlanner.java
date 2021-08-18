@@ -1237,7 +1237,7 @@ public class LocalExecutionPlanner
         {
             if (node.getStep() == PARTIAL) {
                 CiderAggregationNode ciderAggregationNode = new CiderAggregationNode(node, false);
-                System.out.println(ciderAggregationNode.toRAJsonStr());
+                System.out.println(ciderAggregationNode.toRAJsonStr("partial"));
             }
             PhysicalOperation source = node.getSource().accept(this, context);
 

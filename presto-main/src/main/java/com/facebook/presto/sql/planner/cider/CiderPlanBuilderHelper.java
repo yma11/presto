@@ -164,12 +164,19 @@ public class CiderPlanBuilderHelper
     }
     // get output variables of parent node(FilterNode/TableScanNode), which are input of current agg node
     public static ArrayNode getFakeScanFieldNodes(
-            ObjectMapper objectMapper, AggregationNode planNode)
+            ObjectMapper objectMapper, AggregationNode planNode, String step)
     {
         ArrayNode variableNodes = objectMapper.createArrayNode();
         List<VariableReferenceExpression> inputVariables = planNode.getSource().getOutputVariables();
         for (VariableReferenceExpression inputVariable : inputVariables) {
-            variableNodes.add(inputVariable.getName());
+            switch (step) {
+                case "partial":
+                    variableNodes.add(inputVariable.getName());
+                    break;
+                case "final":
+                    variableNodes.add("EXPR$" + inputVariables.indexOf(inputVariable));
+                    break;
+            }
         }
         return variableNodes;
     }
