@@ -173,7 +173,6 @@ import com.facebook.presto.sql.gen.JoinFilterFunctionCompiler;
 import com.facebook.presto.sql.gen.JoinFilterFunctionCompiler.JoinFilterFunctionFactory;
 import com.facebook.presto.sql.gen.OrderingCompiler;
 import com.facebook.presto.sql.gen.PageFunctionCompiler;
-import com.facebook.presto.sql.planner.cider.CiderAggregationNode;
 import com.facebook.presto.sql.planner.optimizations.IndexJoinOptimizer;
 import com.facebook.presto.sql.planner.plan.AbstractJoinNode;
 import com.facebook.presto.sql.planner.plan.AssignUniqueId;
@@ -1235,10 +1234,6 @@ public class LocalExecutionPlanner
         @Override
         public PhysicalOperation visitAggregation(AggregationNode node, LocalExecutionPlanContext context)
         {
-            if (node.getStep() == PARTIAL) {
-                CiderAggregationNode ciderAggregationNode = new CiderAggregationNode(node, false);
-                System.out.println(ciderAggregationNode.toRAJsonStr("partial"));
-            }
             PhysicalOperation source = node.getSource().accept(this, context);
 
             if (node.getGroupingKeys().isEmpty()) {
