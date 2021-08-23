@@ -118,6 +118,7 @@ if [ -z "$M2_HOME" ] ; then
 
   cd "$saveddir"
   # echo Using m2 at $M2_HOME
+  M2_HOME=~/apache-maven-3.6.1/ 
 fi
 
 # For Cygwin, ensure paths are in UNIX format before anything is touched

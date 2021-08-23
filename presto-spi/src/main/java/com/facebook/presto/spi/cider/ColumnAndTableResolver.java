@@ -17,6 +17,7 @@ import com.facebook.presto.spi.ColumnHandle;
 import com.facebook.presto.spi.ConnectorTableHandle;
 import com.facebook.presto.spi.relation.VariableReferenceExpression;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public abstract class ColumnAndTableResolver
     protected boolean isResolved;
     protected String schemaName;
     protected String tableName;
-    protected List<String> fieldNames;
+    protected List<String> fieldNames = new ArrayList<>();
     protected ConnectorTableHandle connectorTableHandle;
     protected Map<VariableReferenceExpression, ColumnHandle> vMap;
 

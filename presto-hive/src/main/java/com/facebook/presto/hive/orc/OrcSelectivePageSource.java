@@ -28,7 +28,6 @@ import com.facebook.presto.spi.PrestoException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mapd.CiderJNI;
 import sun.misc.Unsafe;
 
 import java.io.IOException;
@@ -154,7 +153,7 @@ public class OrcSelectivePageSource
         }
 
         Page output = null;
-        long ptr = CiderJNI.getPtr();
+        // long ptr = CiderJNI.getPtr();
         try {
             Unsafe unsafe = getUnsafe();
             for (int i = 0; i < count; i++) {
@@ -197,7 +196,7 @@ public class OrcSelectivePageSource
                 resultBuffers[i] = bufferPtr;
                 resultNulls[i] = nullPtr;
             }
-
+            /*
             int resultSize = CiderJNI.processBlocks(
                     ptr,
                     subQuery,
@@ -208,6 +207,8 @@ public class OrcSelectivePageSource
                     resultNulls,
                     positionCount);
 
+            */
+            int resultSize = 0;
             Block[] outputBlocks = new Block[resultCount];
             for (int i = 0; i < resultCount; i++) {
                 String type = list.get(i);

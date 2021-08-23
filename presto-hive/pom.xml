@@ -268,7 +268,6 @@
             <groupId>io.airlift</groupId>
             <artifactId>slice</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>units</artifactId>
@@ -279,10 +278,12 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>com.mapd</groupId>
             <artifactId>ciderJNI</artifactId>
         </dependency>
+        -->
 
         <!-- for testing -->
         <dependency>
